@@ -42,7 +42,7 @@ function HomePage() {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4">Products</h2>
+      <h2 className="mb-4">Products For Sale</h2>
       <div className="row mb-4">
         <div className="col-md-6">
           <div className="d-flex align-items-center">

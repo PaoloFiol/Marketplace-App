@@ -7,6 +7,7 @@ function ListProductPage() {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [images, setImages] = useState([]);
+  const [error, setError] = useState(''); // Add state for error messages
 
   const handleProductUpload = async (e) => {
     e.preventDefault();
@@ -38,7 +39,13 @@ function ListProductPage() {
   };
 
   const handleImageChange = (e) => {
-    setImages([...e.target.files]);
+    const selectedFiles = [...e.target.files];
+    if (selectedFiles.length > 5) {
+      setError('You can only upload a maximum of 5 images.');
+    } else {
+      setError('');
+      setImages(selectedFiles);
+    }
   };
 
   return (
@@ -92,6 +99,7 @@ function ListProductPage() {
             onChange={handleImageChange}
             required
           />
+          {error && <p className="text-danger mt-2">{error}</p>}
         </div>
         <button type="submit" className="btn btn-primary mt-3">
           Add Product

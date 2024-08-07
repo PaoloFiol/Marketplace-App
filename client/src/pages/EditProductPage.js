@@ -11,6 +11,7 @@ function EditProductPage() {
   const [price, setPrice] = useState('');
   const [existingImages, setExistingImages] = useState([]);
   const [newImages, setNewImages] = useState([]);
+  const [error, setError] = useState(''); // Add state for error messages
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,7 +34,13 @@ function EditProductPage() {
   }, [id]);
 
   const handleImageChange = (e) => {
-    setNewImages([...e.target.files]);
+    const selectedFiles = [...e.target.files];
+    if (selectedFiles.length + existingImages.length > 5) {
+      setError('You can only upload a maximum of 5 images.');
+    } else {
+      setError('');
+      setNewImages(selectedFiles);
+    }
   };
 
   const handleImageRemove = (index) => {
@@ -110,7 +117,7 @@ function EditProductPage() {
           />
         </div>
         <div className="form-group">
-          <label>Existing Images (Select Up To 5 Maximum)</label>
+          <label>Existing Images</label>
           <div className="d-flex flex-wrap mb-3">
             {existingImages.map((image, index) => (
               <div key={index} className="position-relative mr-2">
@@ -133,7 +140,7 @@ function EditProductPage() {
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="newImages">Add New Images</label>
+          <label htmlFor="newImages">Add New Images (Up To 5 Maximum)</label>
           <input
             type="file"
             className="form-control-file"
@@ -142,6 +149,7 @@ function EditProductPage() {
             multiple
             onChange={handleImageChange}
           />
+          {error && <p className="text-danger mt-2">{error}</p>}
         </div>
         <button type="submit" className="btn btn-primary mt-3">
           Update Product
