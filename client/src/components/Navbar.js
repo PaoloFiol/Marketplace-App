@@ -23,8 +23,8 @@ function Navbar({ isAuthenticated }) {
         <button
           className="navbar-toggler"
           type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
@@ -32,7 +32,7 @@ function Navbar({ isAuthenticated }) {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ml-3">
+          <ul className="navbar-nav ms-lg-3 ms-auto text-center text-lg-start"> {/* Use ms-lg-3 to offset only on large screens */}
             {user ? (
               <>
                 <li className="nav-item mx-2">

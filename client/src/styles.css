@@ -38,6 +38,27 @@ body {
     margin-right: 30px; /* Add space between brand and nav items */
   }
   
+  /* Align navbar items to the right in mobile view */
+  .navbar-collapse {
+    justify-content: flex-end;
+  }
+  
+  /* Mobile view styles */
+  @media (max-width: 991px) {
+    .navbar-nav {
+      flex-direction: column; /* Stack items vertically */
+      align-items: flex-end; /* Align items to the right */
+      text-align: right; /* Align text to the right */
+    }
+  }
+  
+  /* Full screen view styles */
+  @media (min-width: 992px) {
+    .navbar-collapse {
+      justify-content: flex-start; /* Align items closer to the brand on large screens */
+    }
+  }
+  
   /* Product List and Card Styles */
   .product-list {
     display: flex;
