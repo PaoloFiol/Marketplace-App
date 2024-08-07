@@ -82,7 +82,7 @@ function ListProductPage() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="productImages">Product Images</label>
+          <label htmlFor="productImages">Product Images (Select Up To 5 Maximum)</label>
           <input
             type="file"
             className="form-control-file"

@@ -80,7 +80,9 @@ function ProductDetailsPage() {
         </div>
         <div className="col-md-6">
           <h2>{product.name}</h2>
-          <p>{product.description}</p>
+          <p>
+            <strong>Description:</strong> {product.description}
+          </p>
           <p>
             <strong>Price:</strong> ${product.price}
           </p>

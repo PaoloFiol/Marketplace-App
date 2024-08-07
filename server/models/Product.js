@@ -10,4 +10,10 @@ const productSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
+// Pre-save hook to format price
+productSchema.pre('save', function (next) {
+    this.price = parseFloat(this.price.toFixed(2)); // Ensure price is rounded to two decimal places
+    next();
+  });
+  
 module.exports = mongoose.model('Product', productSchema);

@@ -54,7 +54,7 @@ function EditProductPage() {
     });
 
     try {
-      const response = await axios.put(`/api/products/${id}`, formData, {
+      await axios.put(`/api/products/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
@@ -110,7 +110,7 @@ function EditProductPage() {
           />
         </div>
         <div className="form-group">
-          <label>Existing Images</label>
+          <label>Existing Images (Select Up To 5 Maximum)</label>
           <div className="d-flex flex-wrap mb-3">
             {existingImages.map((image, index) => (
               <div key={index} className="position-relative mr-2">
