@@ -27,19 +27,19 @@ Marketplace App is a full-stack web application built using the MERN stack (Mong
 
 ### Installation
 
-1. **Clone the Repository:**
+1. **Clone the repository:**
 
    ```bash
    git clone https://github.com/PaoloFiol/Marketplace-App.git
    cd Marketplace-App
 
-2. **Install Server Dependencies**
+2. **Install server dependencies**
 
     ```bash
     cd server
     npm install
 
-3. **Install Client Dependencies**
+3. **Install client dependencies**
 
     ```bash
     cd ../client
@@ -54,11 +54,12 @@ Marketplace App is a full-stack web application built using the MERN stack (Mong
     CLOUDINARY_API_KEY=your_cloudinary_api_key
     CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 
-5. **Run the application on 'http://localhost:3000'**
+5. **Run the server in 'server' directory**
 
-    In /server directory: 
     ```bash
     npm start
-    In /client directory: 
+
+6. **In a separate terminal, run the client in 'client' directory**
+
     ```bash
     npm start
