@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const cloudinary = require('cloudinary').v2; // Import Cloudinary
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
+const cartRoutes = require('./routes/cartRoutes'); // Import Cart Routes
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ mongoose.connect(process.env.MONGO_URI, {
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes); // Add Cart Routes
 
 const PORT = process.env.PORT || 5000;
 

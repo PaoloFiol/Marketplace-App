@@ -8,6 +8,7 @@ function ProductDetailsPage() {
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -35,9 +36,26 @@ function ProductDetailsPage() {
     fetchCurrentUser();
   }, [id]);
 
+  const addToCart = async () => {
+    const token = localStorage.getItem('authToken');
+    try {
+      await axios.post(
+        '/api/cart/add',
+        { productId: product._id },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      alert('Product added to cart');
+    } catch (error) {
+      setError(error.response.data.message || 'Error adding product to cart');
+    }
+  };
+
   if (!product) return <p>Loading...</p>;
 
-  const isProductOwner = currentUser && product.addedBy._id === currentUser._id;
+  const isProductOwner =
+    currentUser && product.addedBy._id === currentUser._id;
 
   return (
     <div className="container mt-4">
@@ -45,12 +63,16 @@ function ProductDetailsPage() {
         <div className="col-md-6">
           <div className="row">
             {product.images.map((image, index) => (
-              <div key={index} className="col-6 mb-4">
+              <div key={index} className="col-12 col-md-6 mb-4">
                 <img
                   src={image}
                   alt={`Product ${index}`}
                   className="img-fluid rounded shadow-sm"
-                  style={{ height: '300px', width: '100%', objectFit: 'cover' }}
+                  style={{
+                    height: '250px', // Adjusted height for a wider appearance
+                    width: '100%',
+                    objectFit: 'cover',
+                  }}
                 />
               </div>
             ))}
@@ -73,8 +95,11 @@ function ProductDetailsPage() {
               Edit Product
             </button>
           ) : (
-            <button className="btn btn-primary mt-3">Add to Cart</button>
+            <button className="btn btn-primary mt-3" onClick={addToCart}>
+              Add to Cart
+            </button>
           )}
+          {error && <p className="text-danger mt-3">{error}</p>}
         </div>
       </div>
     </div>
