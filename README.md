@@ -57,9 +57,11 @@ Marketplace App is a full-stack web application built using the MERN stack (Mong
 5. **Run the server in 'server' directory**
 
     ```bash
+    cd ../server
     npm start
 
 6. **In a separate terminal, run the client in 'client' directory**
 
     ```bash
+    cd ../client
     npm start
