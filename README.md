@@ -1,10 +1,11 @@
 # Marketplace App
 
-Marketplace App is a full-stack web application built using the MERN stack (MongoDB, Express, React, Node.js) that allows users to list and browse products for sale. The application includes features such as user authentication, product management, shopping cart, and more.
+Marketplace App is a full-stack web application built using the MERN stack (MongoDB, Express, React, Node.js) that allows users to list and browse products for sale. The application includes features such as user authentication, profile management, product management, shopping cart, and more.
 
 ## Features
 
 - **User Authentication:** Users can register and log in to access additional features.
+- **Profile Updates:** Users can update their profile info like email, password, and address.
 - **Product Management:** Users can list products for sale, edit existing products, and delete them.
 - **Shopping Cart:** Users can add products to their shopping cart and manage their cart items.
 - **Responsive Design:** The application is styled using modern CSS and Bootstrap for a responsive and user-friendly interface.
@@ -34,16 +35,19 @@ Marketplace App is a full-stack web application built using the MERN stack (Mong
 
 2. **Install Server Dependencies**
 
+    ```bash
     cd server
     npm install
 
 3. **Install Client Dependencies**
 
+    ```bash
     cd ../client
     npm install
 
 4. **Create a '.env' file in the 'server' directory and add these env variables with your own keys**
 
+    ```bash
     MONGO_URI=your_mongo_atlas_connection_string
     JWT_SECRET=your_jwt_secret_key
     CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
@@ -52,5 +56,9 @@ Marketplace App is a full-stack web application built using the MERN stack (Mong
 
 5. **Run the application on 'http://localhost:3000'**
 
-    In Server directory: npm start
-    In Client directory: npm start
+    In /server directory: 
+    ```bash
+    npm start
+    In /client directory: 
+    ```bash
+    npm start
