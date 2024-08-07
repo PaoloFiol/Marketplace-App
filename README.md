@@ -65,3 +65,7 @@ Marketplace App is a full-stack web application built using the MERN stack (Mong
     ```bash
     cd ../client
     npm start
+
+7. **Access the application**
+
+    Open your web browser and visit http://localhost:3000 to access the application.
