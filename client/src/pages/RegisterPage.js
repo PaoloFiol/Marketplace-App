@@ -37,7 +37,15 @@ function RegisterPage() {
             className="form-control"
             placeholder="Username"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value.length > 20) {
+                alert("Username cannot exceed 20 characters")
+              } else {
+                setUsername(e.target.value);
+              }
+            }}
+            maxLength="20"  // Maximum character limit
+            minLength="3" //Minimum character limit
             required
           />
         </div>
@@ -47,7 +55,14 @@ function RegisterPage() {
             className="form-control"
             placeholder="Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value.length > 320) {
+                alert("Email address cannot exceed 320 characters");
+              } else {
+                setEmail(e.target.value);
+              }
+            }}
+            maxLength="320"  // Maximum character limit
             required
           />
         </div>
@@ -67,7 +82,14 @@ function RegisterPage() {
             className="form-control"
             placeholder="Shipping Address"
             value={shippingAddress}
-            onChange={(e) => setShippingAddress(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value.length > 200) {
+                alert("Shipping address cannot exceed 200 characters");
+              } else {
+                setShippingAddress(e.target.value);
+              }
+            }}
+            maxLength="200"  // Maximum character limit
             required
           />
         </div>

@@ -55,6 +55,7 @@ function MyProfilePage() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            maxLength="320"
             required
           />
         </div>
@@ -65,6 +66,7 @@ function MyProfilePage() {
             placeholder="Shipping Address"
             value={shippingAddress}
             onChange={(e) => setShippingAddress(e.target.value)}
+            maxLength="200"
             required
           />
         </div>

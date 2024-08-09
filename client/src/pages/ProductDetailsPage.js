@@ -79,8 +79,8 @@ function ProductDetailsPage() {
           </div>
         </div>
         <div className="col-md-6">
-          <h2>{product.name}</h2>
-          <p>
+          <h2 className="product-details-text">{product.name}</h2>
+          <p className="product-details-text">
             <strong>Description:</strong> {product.description}
           </p>
           <p>

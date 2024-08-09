@@ -60,8 +60,16 @@ function ListProductPage() {
             id="productName"
             placeholder="Product Name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value.length > 100) {
+                alert("Product name cannot exceed 100 characters");
+              } else {
+                setName(e.target.value);
+              }
+            }}
+            maxLength="100"  // Maximum character limit
             required
+            
           />
         </div>
         <div className="form-group">
@@ -72,8 +80,16 @@ function ListProductPage() {
             rows="3"
             placeholder="Product Description"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value.length > 2000) {
+                alert("Product description cannot exceed 2000 characters");
+              } else {
+                setDescription(e.target.value);
+              }
+            }}
+            maxLength="2000"  // Maximum character limit
             required
+            
           ></textarea>
         </div>
         <div className="form-group">
@@ -84,7 +100,16 @@ function ListProductPage() {
             id="productPrice"
             placeholder="Price"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => {
+              const value = parseFloat(e.target.value);
+              if (value > 10000000) {
+                alert("Price cannot exceed $10,000,000");
+                setPrice(10000000); 
+              } else {
+                setPrice(value);
+              }
+            }}
+            max="10000000"  // Maximum price limit
             required
           />
         </div>

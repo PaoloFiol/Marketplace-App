@@ -1,199 +1,199 @@
-/* client/src/styles.css */
-
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar Styles */
+nav {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+nav a,
+nav .btn-link {
+  color: #fff;
+  margin-right: 15px;
+  text-decoration: none;
+}
+
+.navbar-nav .nav-item {
+  padding: 0 8px; /* Slightly reduced padding for closer spacing */
+}
+
+.navbar-nav .btn-link {
+  padding: 0;
+  text-decoration: none;
+  color: #fff;
+  align-items: center; /* Ensure button aligns vertically */
+  display: flex; /* Makes sure button behaves like a link */
+}
+
+.navbar-brand {
+  font-weight: bold;
+  margin-right: 30px; /* Add space between brand and nav items */
+}
+
+/* Align navbar items to the right in mobile view */
+.navbar-collapse {
+  justify-content: flex-end;
+}
+
+/* Mobile view styles */
+@media (max-width: 991px) {
+  .navbar-nav {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-end; /* Align items to the right */
+    text-align: right; /* Align text to the right */
   }
-  
-  /* Navbar Styles */
-  nav {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-  }
-  
-  nav a,
-  nav .btn-link {
-    color: #fff;
-    margin-right: 15px;
-    text-decoration: none;
-  }
-  
-  .navbar-nav .nav-item {
-    padding: 0 8px; /* Slightly reduced padding for closer spacing */
-  }
-  
-  .navbar-nav .btn-link {
-    padding: 0;
-    text-decoration: none;
-    color: #fff;
-    align-items: center; /* Ensure button aligns vertically */
-    display: flex; /* Makes sure button behaves like a link */
-  }
-  
-  .navbar-brand {
-    font-weight: bold;
-    margin-right: 30px; /* Add space between brand and nav items */
-  }
-  
-  /* Align navbar items to the right in mobile view */
+}
+
+/* Full screen view styles */
+@media (min-width: 992px) {
   .navbar-collapse {
-    justify-content: flex-end;
+    justify-content: flex-start; /* Align items closer to the brand on large screens */
   }
-  
-  /* Mobile view styles */
-  @media (max-width: 991px) {
-    .navbar-nav {
-      flex-direction: column; /* Stack items vertically */
-      align-items: flex-end; /* Align items to the right */
-      text-align: right; /* Align text to the right */
-    }
-  }
-  
-  /* Full screen view styles */
-  @media (min-width: 992px) {
-    .navbar-collapse {
-      justify-content: flex-start; /* Align items closer to the brand on large screens */
-    }
-  }
-  
-  /* Product List and Card Styles */
-  .product-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .product-card {
-    border: 1px solid #ccc;
-    margin: 10px;
-    padding: 10px;
-    width: 200px;
-    text-align: center;
-    transition: transform 0.2s;
-  }
-  
-  .product-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .product-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 4px;
-  }
-  
-  /* Button Styles */
-  button,
-  .btn {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  button:hover,
-  .btn:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Bootstrap Overrides */
-  .container {
-    padding: 20px;
-  }
-  
-  input[type="text"],
-  .form-control {
-    margin-bottom: 20px;
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  .card {
-    margin: 10px 0;
-  }
-  
-  .card-body {
-    padding: 15px;
-  }
-  
-  /* Product Details Page Styles */
-  .product-details-container {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-  }
-  
-  .product-details-text {
-    flex: 1;
-  }
-  
-  .product-details-text h2 {
-    margin-top: 0;
-  }
-  
-  /* New Product Images Grid Styles */
-  .product-images {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: flex-start;
-  }
-  
-  .img-fluid {
-    border-radius: 4px;
-  }
-  
-  /* Updated Product Details Image Styles */
-  .product-details-image {
-    width: 100%;
-    height: 220px; /* Adjusted height for a wider look */
-    object-fit: cover;
-    border-radius: 4px;
-  }
-  
-  /* Shopping Cart Page Styles */
-  .cart-container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .cart-item {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding: 15px 0;
-  }
-  
-  .cart-item img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 4px;
-    margin-right: 15px;
-  }
-  
-  .cart-item-details {
-    flex: 1;
-  }
-  
-  .cart-item-price {
-    margin-right: 15px;
-  }
-  
-  .cart-item button {
-    background-color: #dc3545; /* Bootstrap's danger color */
-  }
-  
-  .cart-item button:hover {
-    background-color: #c82333; /* Darker shade of danger color */
-  }
-  
+}
+
+/* Product List and Card Styles */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.product-card {
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Button Styles */
+button,
+.btn {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover,
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* Bootstrap Overrides */
+.container {
+  padding: 20px;
+}
+
+input[type="text"],
+.form-control {
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.card {
+  margin: 10px 0;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+/* Product Details Page Styles */
+.product-details-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.product-details-text {
+  flex: 1;
+  word-wrap: break-word; /* Ensure long text wraps onto new lines */
+  word-break: break-all;
+  white-space: normal;
+}
+
+.product-details-text h2 {
+  margin-top: 0;
+}
+
+/* New Product Images Grid Styles */
+.product-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.img-fluid {
+  border-radius: 4px;
+}
+
+/* Updated Product Details Image Styles */
+.product-details-image {
+  width: 100%;
+  height: 220px; /* Adjusted height for a wider look */
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Shopping Cart Page Styles */
+.cart-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+}
+
+.cart-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-price {
+  margin-right: 15px;
+}
+
+.cart-item button {
+  background-color: #dc3545; /* Bootstrap's danger color */
+}
+
+.cart-item button:hover {
+  background-color: #c82333; /* Darker shade of danger color */
+}
