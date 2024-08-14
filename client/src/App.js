@@ -11,6 +11,7 @@ import ShoppingCartPage from './pages/ShoppingCartPage';
 import ListProductPage from './pages/ListProductPage';
 import EditProductPage from './pages/EditProductPage';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -23,18 +24,21 @@ function App() {
 
   return (
     <Router>
-      <Navbar isAuthenticated={isAuthenticated} />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
-        <Route path="/register" element={<RegisterPage setIsAuthenticated={setIsAuthenticated} />} />
-        <Route path="/product/:id" element={<ProductDetailsPage />} />
-        <Route path="/my-products" element={<MyProductsPage />} />
-        <Route path="/profile" element={<MyProfilePage />} />
-        <Route path="/cart" element={<ShoppingCartPage />} />
-        <Route path="/list-product" element={<ListProductPage />} />
-        <Route path="/edit-product/:id" element={<EditProductPage />} />
-      </Routes>
+      <div className="App">
+        <Navbar isAuthenticated={isAuthenticated} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="/register" element={<RegisterPage setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="/product/:id" element={<ProductDetailsPage />} />
+          <Route path="/my-products" element={<MyProductsPage />} />
+          <Route path="/profile" element={<MyProfilePage />} />
+          <Route path="/cart" element={<ShoppingCartPage />} />
+          <Route path="/list-product" element={<ListProductPage />} />
+          <Route path="/edit-product/:id" element={<EditProductPage />} />
+        </Routes>
+        <Footer /> 
+      </div>
     </Router>
   );
 }
