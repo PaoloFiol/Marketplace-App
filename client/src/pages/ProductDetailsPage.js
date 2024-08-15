@@ -95,7 +95,7 @@ function ProductDetailsPage() {
           <p>
             <strong>Listed By:</strong> {product.addedBy.username}
           </p>
-          {product.quantity > 0 && (
+          {!isProductOwner && product.quantity > 0 && (
             <div className="form-group">
               <label htmlFor="quantity">Quantity</label>
               <input

@@ -14,7 +14,10 @@ function ShoppingCartPage() {
         const { data } = await axios.get('/api/cart', {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setCartItems(data.items);
+        // Filter out any items where the product is null (product deleted)
+        const validItems = data.items.filter(item => item.product);
+
+        setCartItems(validItems);
 
         // Calculate the total cost
         const cost = data.items.reduce((acc, item) => acc + item.quantity * item.product.price, 0);

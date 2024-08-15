@@ -1,5 +1,6 @@
 // server/controllers/productController.js
 const Product = require('../models/Product');
+const Cart = require('../models/Cart');
 const cloudinary = require('cloudinary').v2;
 
 // Add a new product
@@ -103,7 +104,7 @@ const updateProduct = async (req, res) => {
   }
 };
 
-// Delete a product
+/// Delete a product
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
   try {
@@ -117,10 +118,18 @@ const deleteProduct = async (req, res) => {
       return res.status(401).json({ message: 'Not authorized' });
     }
 
+    // Remove the product from all carts
+    await Cart.updateMany(
+      { 'items.product': id },
+      { $pull: { items: { product: id } } }
+    );
+
+    // Delete the product
     await Product.findByIdAndDelete(id);
 
-    res.json({ message: 'Product removed' });
+    res.json({ message: 'Product removed and deleted from all carts' });
   } catch (error) {
+    console.error('Error deleting product:', error);
     res.status(500).json({ message: error.message });
   }
 };
