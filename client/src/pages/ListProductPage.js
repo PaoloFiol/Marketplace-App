@@ -6,8 +6,9 @@ function ListProductPage() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState(1); // Default quantity
   const [images, setImages] = useState([]);
-  const [error, setError] = useState(''); // Add state for error messages
+  const [error, setError] = useState('');
 
   const handleProductUpload = async (e) => {
     e.preventDefault();
@@ -17,6 +18,7 @@ function ListProductPage() {
     formData.append('name', name);
     formData.append('description', description);
     formData.append('price', price);
+    formData.append('quantity', quantity); // Include quantity
     images.forEach((image) => {
       formData.append('images', image);
     });
@@ -32,6 +34,7 @@ function ListProductPage() {
       setName('');
       setDescription('');
       setPrice('');
+      setQuantity(1); // Reset quantity
       setImages([]);
     } catch (error) {
       console.error('Error adding product', error);
@@ -60,16 +63,8 @@ function ListProductPage() {
             id="productName"
             placeholder="Product Name"
             value={name}
-            onChange={(e) => {
-              if (e.target.value.length > 100) {
-                alert("Product name cannot exceed 100 characters");
-              } else {
-                setName(e.target.value);
-              }
-            }}
-            maxLength="100"  // Maximum character limit
+            onChange={(e) => setName(e.target.value)}
             required
-            
           />
         </div>
         <div className="form-group">
@@ -80,16 +75,8 @@ function ListProductPage() {
             rows="3"
             placeholder="Product Description"
             value={description}
-            onChange={(e) => {
-              if (e.target.value.length > 2000) {
-                alert("Product description cannot exceed 2000 characters");
-              } else {
-                setDescription(e.target.value);
-              }
-            }}
-            maxLength="2000"  // Maximum character limit
+            onChange={(e) => setDescription(e.target.value)}
             required
-            
           ></textarea>
         </div>
         <div className="form-group">
@@ -100,16 +87,21 @@ function ListProductPage() {
             id="productPrice"
             placeholder="Price"
             value={price}
-            onChange={(e) => {
-              const value = parseFloat(e.target.value);
-              if (value > 10000000) {
-                alert("Price cannot exceed $10,000,000");
-                setPrice(10000000); 
-              } else {
-                setPrice(value);
-              }
-            }}
-            max="10000000"  // Maximum price limit
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="productQuantity">Quantity</label>
+          <input
+            type="number"
+            className="form-control"
+            id="productQuantity"
+            placeholder="Quantity"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            min="1"
+            max="200"
             required
           />
         </div>

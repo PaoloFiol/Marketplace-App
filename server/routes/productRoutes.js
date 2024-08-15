@@ -20,7 +20,7 @@ router.get('/', getProducts);
 router.get('/my-products', protect, getMyProducts);
 router.post('/', protect, upload.array('images', 5), addProduct);
 router.get('/:id', getProductById);
-router.put('/:id', protect, upload.array('images', 5), updateProduct); // Ensure multer is used
+router.put('/:id', protect, upload.array('images', 5), updateProduct);
 router.delete('/:id', protect, deleteProduct);
 
 module.exports = router;

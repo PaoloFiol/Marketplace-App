@@ -1,5 +1,4 @@
 // server/models/Cart.js
-
 const mongoose = require('mongoose');
 
 const cartSchema = new mongoose.Schema({
@@ -21,7 +20,7 @@ const cartSchema = new mongoose.Schema({
       },
       quantity: {
         type: Number,
-        default: 1,
+        required: true, // Make sure this field is required
       },
     },
   ],

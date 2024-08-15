@@ -9,9 +9,10 @@ function EditProductPage() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState(1); // Default quantity
   const [existingImages, setExistingImages] = useState([]);
   const [newImages, setNewImages] = useState([]);
-  const [error, setError] = useState(''); // Add state for error messages
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,6 +26,7 @@ function EditProductPage() {
         setName(data.name);
         setDescription(data.description);
         setPrice(data.price);
+        setQuantity(data.quantity); // Set quantity
         setExistingImages(data.images);
       } catch (error) {
         console.error('Error fetching product details', error);
@@ -55,6 +57,7 @@ function EditProductPage() {
     formData.append('name', name);
     formData.append('description', description);
     formData.append('price', price);
+    formData.append('quantity', quantity); // Include quantity
     formData.append('existingImages', JSON.stringify(existingImages));
     newImages.forEach((image) => {
       formData.append('images', image);
@@ -88,14 +91,7 @@ function EditProductPage() {
             id="productName"
             placeholder="Product Name"
             value={name}
-            onChange={(e) => {
-              if (e.target.value.length > 2000) {
-                alert("Product description cannot exceed 2000 characters");
-              } else {
-                setDescription(e.target.value);
-              }
-            }}
-            maxLength="2000"  // Maximum character limit
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
@@ -107,14 +103,7 @@ function EditProductPage() {
             rows="3"
             placeholder="Product Description"
             value={description}
-            onChange={(e) => {
-              if (e.target.value.length > 2000) {
-                alert("Product description cannot exceed 2000 characters");
-              } else {
-                setDescription(e.target.value);
-              }
-            }}
-            maxLength="2000"  // Maximum character limit
+            onChange={(e) => setDescription(e.target.value)}
             required
           ></textarea>
         </div>
@@ -126,16 +115,21 @@ function EditProductPage() {
             id="productPrice"
             placeholder="Price"
             value={price}
-            onChange={(e) => {
-              const value = parseFloat(e.target.value);
-              if (value > 10000000) {
-                alert("Price cannot exceed $10,000,000");
-                setPrice(10000000); 
-              } else {
-                setPrice(value);
-              }
-            }}
-            max="10000000"  // Maximum price limit
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="productQuantity">Quantity</label>
+          <input
+            type="number"
+            className="form-control"
+            id="productQuantity"
+            placeholder="Quantity"
+            value={quantity}
+            onChange={(e) => setQuantity(Math.max(1, Math.min(200, Number(e.target.value))))}
+            min="1"
+            max="200"
             required
           />
         </div>

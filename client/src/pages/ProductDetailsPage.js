@@ -9,6 +9,7 @@ function ProductDetailsPage() {
   const [product, setProduct] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [error, setError] = useState('');
+  const [quantity, setQuantity] = useState(1); // State for quantity
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -41,12 +42,15 @@ function ProductDetailsPage() {
     try {
       await axios.post(
         '/api/cart/add',
-        { productId: product._id },
+        { productId: product._id, quantity }, // Send quantity with the request
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
       alert('Product added to cart');
+      // Update product quantity in the state to reflect the change
+      setProduct({ ...product, quantity: product.quantity - quantity });
+      setQuantity(1); // Reset quantity input
     } catch (error) {
       setError(error.response.data.message || 'Error adding product to cart');
     }
@@ -54,8 +58,7 @@ function ProductDetailsPage() {
 
   if (!product) return <p>Loading...</p>;
 
-  const isProductOwner =
-    currentUser && product.addedBy._id === currentUser._id;
+  const isProductOwner = currentUser && product.addedBy._id === currentUser._id;
 
   return (
     <div className="container mt-4">
@@ -69,7 +72,7 @@ function ProductDetailsPage() {
                   alt={`Product ${index}`}
                   className="img-fluid rounded shadow-sm"
                   style={{
-                    height: '250px', // Adjusted height for a wider appearance
+                    height: '250px',
                     width: '100%',
                     objectFit: 'cover',
                   }}
@@ -87,8 +90,27 @@ function ProductDetailsPage() {
             <strong>Price:</strong> ${product.price}
           </p>
           <p>
+            <strong>Available Quantity:</strong> {product.quantity > 0 ? product.quantity : 'Sold Out'}
+          </p>
+          <p>
             <strong>Listed By:</strong> {product.addedBy.username}
           </p>
+          {product.quantity > 0 && (
+            <div className="form-group">
+              <label htmlFor="quantity">Quantity</label>
+              <input
+                type="number"
+                className="form-control"
+                id="quantity"
+                value={quantity}
+                onChange={(e) =>
+                  setQuantity(Math.min(product.quantity, Math.max(1, e.target.value)))
+                } // Ensure quantity is within the available stock
+                min="1"
+                max={product.quantity}
+              />
+            </div>
+          )}
           {isProductOwner ? (
             <button
               className="btn btn-secondary mt-3"
@@ -96,9 +118,13 @@ function ProductDetailsPage() {
             >
               Edit Product
             </button>
-          ) : (
+          ) : product.quantity > 0 ? (
             <button className="btn btn-primary mt-3" onClick={addToCart}>
               Add to Cart
+            </button>
+          ) : (
+            <button className="btn btn-danger mt-3" disabled>
+              Sold Out
             </button>
           )}
           {error && <p className="text-danger mt-3">{error}</p>}
