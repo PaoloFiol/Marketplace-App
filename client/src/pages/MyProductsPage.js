@@ -61,6 +61,7 @@ function MyProductsPage() {
                 <h5 className="card-title">{product.name}</h5>
                 <p className="card-text">{product.description}</p>
                 <p className="card-text">${product.price}</p>
+                <p className="card-text">Available Quantity: {product.quantity}</p>
                 <button
                   onClick={() => handleEdit(product._id)}
                   className="btn btn-primary mr-2"
