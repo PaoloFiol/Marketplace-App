@@ -19,12 +19,13 @@ function Footer() {
 
 const footerStyle = {
   textAlign: 'center',
-  padding: '20px',
-  backgroundColor: '#333',
+  padding: '5px 0', // Reduced padding for a thinner footer
+  backgroundColor: 'rgba(51, 51, 51, 0.6)', // More transparent background
   color: '#fff',
   position: 'fixed',
   bottom: '0',
   width: '100%',
+  fontSize: '14px', // Compact font size
 };
 
 const linkStyle = {
