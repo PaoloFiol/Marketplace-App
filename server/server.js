@@ -19,8 +19,21 @@ cloudinary.config({
 
 const app = express();
 
+// Configure CORS
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://your-frontend-domain.vercel.app'] // Replace with your Vercel domain
+    : 'http://localhost:3000',
+  credentials: true
+}));
+
 app.use(express.json());
-app.use(cors());
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Something went wrong!' });
+});
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -28,11 +41,19 @@ mongoose.connect(process.env.MONGO_URI, {
   serverSelectionTimeoutMS: 30000,
 })
 .then(() => console.log('MongoDB connected'))
-.catch(err => console.error('MongoDB connection error:', err));
+.catch(err => {
+  console.error('MongoDB connection error:', err);
+  process.exit(1); // Exit if cannot connect to database
+});
 
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 
 // Serve static files from the React app
 if (process.env.NODE_ENV === 'production') {
