@@ -21,9 +21,7 @@ const app = express();
 
 // Configure CORS
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://your-frontend-domain.vercel.app'] // Replace with your Vercel domain
-    : 'http://localhost:3000',
+  origin: ['https://marketplaceapp-alpha.vercel.app', 'http://localhost:3000'],
   credentials: true
 }));
 
