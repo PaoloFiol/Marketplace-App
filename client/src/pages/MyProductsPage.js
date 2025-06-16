@@ -1,6 +1,6 @@
 // client/src/pages/MyProductsPage.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import { useNavigate } from 'react-router-dom';
 
 function MyProductsPage() {
@@ -10,15 +10,21 @@ function MyProductsPage() {
 
   useEffect(() => {
     const fetchMyProducts = async () => {
-      const token = localStorage.getItem('authToken');
       try {
-        const { data } = await axios.get('/api/products/my-products', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        console.log('Fetching my products...');
+        const token = localStorage.getItem('authToken');
+        console.log('Token:', token ? 'exists' : 'missing');
+        
+        const { data } = await axiosInstance.get('/api/products/my-products');
+        console.log('Products data:', data);
         setMyProducts(data);
       } catch (error) {
+        console.error('Error details:', {
+          message: error.message,
+          response: error.response?.data,
+          status: error.response?.status
+        });
         setError('Error fetching my products');
-        console.error('Error fetching my products', error);
       }
     };
     fetchMyProducts();
@@ -26,15 +32,16 @@ function MyProductsPage() {
 
   const handleDelete = async (productId) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
-      const token = localStorage.getItem('authToken');
       try {
-        await axios.delete(`/api/products/${productId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await axiosInstance.delete(`/api/products/${productId}`);
         setMyProducts(myProducts.filter((product) => product._id !== productId));
       } catch (error) {
+        console.error('Error details:', {
+          message: error.message,
+          response: error.response?.data,
+          status: error.response?.status
+        });
         setError('Error deleting product');
-        console.error('Error deleting product', error);
       }
     }
   };
