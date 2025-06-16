@@ -1,6 +1,6 @@
 // client/src/pages/LoginPage.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage({ setIsAuthenticated }) {
@@ -13,7 +13,7 @@ function LoginPage({ setIsAuthenticated }) {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post('/api/users/login', { email, password });
+      const { data } = await axiosInstance.post('/api/users/login', { email, password });
       localStorage.setItem('authToken', data.token);
       setIsAuthenticated(true); // Update authentication state
       navigate('/'); // Redirect to homepage after successful login

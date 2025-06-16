@@ -1,6 +1,6 @@
 // client/src/pages/ProductDetailsPage.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
 function ProductDetailsPage() {
@@ -14,7 +14,7 @@ function ProductDetailsPage() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(`/api/products/${id}`);
+        const { data } = await axiosInstance.get(`/api/products/${id}`);
         setProduct(data);
       } catch (error) {
         console.error('Error fetching product details', error);
@@ -22,11 +22,8 @@ function ProductDetailsPage() {
     };
 
     const fetchCurrentUser = async () => {
-      const token = localStorage.getItem('authToken');
       try {
-        const { data } = await axios.get('/api/users/profile', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const { data } = await axiosInstance.get('/api/users/profile');
         setCurrentUser(data);
       } catch (error) {
         console.error('Error fetching current user', error);
@@ -38,19 +35,11 @@ function ProductDetailsPage() {
   }, [id]);
 
   const addToCart = async () => {
-    const token = localStorage.getItem('authToken');
     try {
-      await axios.post(
-        '/api/cart/add',
-        { productId: product._id, quantity }, // Send quantity with the request
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      await axiosInstance.post('/api/cart/add', { productId: product._id, quantity });
       alert('Product added to cart');
-      // Update product quantity in the state to reflect the change
       setProduct({ ...product, quantity: product.quantity - quantity });
-      setQuantity(1); // Reset quantity input
+      setQuantity(1);
     } catch (error) {
       setError(error.response.data.message || 'Error adding product to cart');
     }

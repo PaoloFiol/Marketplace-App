@@ -1,6 +1,6 @@
 // client/src/pages/HomePage.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 import ProductCard from '../components/ProductCard';
 
 function HomePage() {
@@ -10,7 +10,7 @@ function HomePage() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data } = await axios.get('/api/products');
+      const { data } = await axiosInstance.get('/api/products');
       setProducts(data);
     };
     fetchProducts();

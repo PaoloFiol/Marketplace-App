@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 
 function ShoppingCartPage() {
   const [cartItems, setCartItems] = useState([]);
@@ -9,17 +9,10 @@ function ShoppingCartPage() {
 
   useEffect(() => {
     const fetchCartItems = async () => {
-      const token = localStorage.getItem('authToken');
       try {
-        const { data } = await axios.get('/api/cart', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        // Filter out any items where the product is null (product deleted)
+        const { data } = await axiosInstance.get('/api/cart');
         const validItems = data.items.filter(item => item.product);
-
         setCartItems(validItems);
-
-        // Calculate the total cost
         const cost = data.items.reduce((acc, item) => acc + item.quantity * item.product.price, 0);
         setTotalCost(cost);
       } catch (error) {
@@ -35,19 +28,8 @@ function ShoppingCartPage() {
 
   const handleRemove = async (productId, removeQuantity) => {
     if (window.confirm('Are you sure you want to remove this item from the cart?')) {
-      const token = localStorage.getItem('authToken');
       try {
-        console.log(`Removing ${removeQuantity} of product ${productId} from cart`);
-        const response = await axios.put(
-          `/api/cart/remove/${productId}`,
-          { removeQuantity },
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        console.log('Remove response:', response.data);
-
-        // Update the cart items locally
+        await axiosInstance.put(`/api/cart/remove/${productId}`, { removeQuantity });
         setCartItems((prevItems) =>
           prevItems
             .map((item) => {
@@ -61,11 +43,8 @@ function ShoppingCartPage() {
             })
             .filter((item) => item.quantity > 0) // Remove items with quantity 0
         );
-
-        // Recalculate the total cost after removing an item
         const newTotalCost = cartItems.reduce((acc, item) => acc + item.quantity * item.product.price, 0);
         setTotalCost(newTotalCost);
-
       } catch (error) {
         console.error('Error removing cart item:', error);
         setError('Failed to remove item from cart.');

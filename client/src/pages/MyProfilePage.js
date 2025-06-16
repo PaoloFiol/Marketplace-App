@@ -1,6 +1,6 @@
 // client/src/pages/MyProfilePage.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 
 function MyProfilePage() {
   const [email, setEmail] = useState('');
@@ -11,11 +11,8 @@ function MyProfilePage() {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const token = localStorage.getItem('authToken');
       try {
-        const { data } = await axios.get('/api/users/profile', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const { data } = await axiosInstance.get('/api/users/profile');
         setEmail(data.email);
         setShippingAddress(data.shippingAddress);
       } catch (error) {
@@ -28,13 +25,8 @@ function MyProfilePage() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('authToken');
     try {
-      await axios.put(
-        '/api/users/profile',
-        { email, shippingAddress, password },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await axiosInstance.put('/api/users/profile', { email, shippingAddress, password });
       setSuccess('Profile updated successfully');
     } catch (error) {
       setError('Error updating profile');

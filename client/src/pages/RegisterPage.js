@@ -1,6 +1,6 @@
 // client/src/pages/RegisterPage.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../config/axios';
 
 function RegisterPage() {
   const [username, setUsername] = useState('');
@@ -12,7 +12,7 @@ function RegisterPage() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('/api/users/register', {
+      const { data } = await axiosInstance.post('/api/users/register', {
         username,
         email,
         password,
