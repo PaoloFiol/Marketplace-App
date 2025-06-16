@@ -21,7 +21,7 @@ const app = express();
 
 // Configure CORS
 app.use(cors({
-  origin: ['https://marketplaceapp-alpha.vercel.app', 'http://localhost:3000'],
+  origin: ['https://marketplaceapp-lyart.vercel.app', 'http://localhost:3000'],
   credentials: true
 }));
 
